@@ -1,0 +1,45 @@
+FROM  jenkins/jenkins
+MAINTAINER intel
+USER root
+RUN apt-get update
+RUN apt-get install -y default-jre
+RUN apt-get install -y openjdk-11-jre-headless
+RUN apt-get install -y git maven
+ADD https://get.jenkins.io/war-stable/2.263.4/jenkins.war  /
+ENTRYPOINT ["java","-jar","jenkins.war"]
+
+----------------------------------------------
+
+
+FROM  tomee
+MAINTAINER intel
+USER root
+RUN apt-get update
+RUN apt-get install -y tomcat9
+RUN apt-get install -y tomcat9-admin
+COPY /root/data/tomcat-users.xml /etc/tomcat9
+
+
+
+docker-compose.yml
+---
+version: '3.8'
+services:
+ myjenkins:
+  build: .
+  container_name: jenkins
+  ports:
+   - 5050:8080
+
+
+ qaserver:
+  image: tomee
+  ports:
+   - 6060:8080
+  container_name: qaserver
+
+ prodserver:
+  image: tomee
+  container_name: prodserver
+  ports:
+   - 7070:8080
