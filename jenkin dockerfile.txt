@@ -10,6 +10,8 @@ ENTRYPOINT ["java","-jar","jenkins.war"]
 
 ----------------------------------------------
 
+changes by shaaaaaa
+
 
 FROM  tomee
 MAINTAINER intel
