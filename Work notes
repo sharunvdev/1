@@ -1,0 +1,13 @@
+# terraform installation
+
+wget https://release.hashicorp.com/terraform/1.1.9/terraform_1.1.9_linux_386.zip
+unzip terraform_1.1.9_linux_386.zip
+chmod u+x terraform
+sudo mv terraform /user/local/bin
+terraform version
+
+#Access Azure cluster
+
+az aks get-credentials -n <custer-name> --resource-group <resource_group_name> 
+
+
